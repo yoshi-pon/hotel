@@ -1,0 +1,53 @@
+{% extends 'hotel/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block heading %}予約情報入力{% endblock %}
+
+{% block content %}
+    <section class="section bg-light pb-0"  >
+      <div class="container">
+        <div class="row check-availabilty" id="next">
+          <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
+	    <ul>
+	      <li class="h4">チェックイン:   {{ checkin }}</li>
+	      <li class="h4">チェックアウト: {{ checkout }}</li>
+	      <li class="h4">部屋タイプ:    {{ room_type }}</li>
+	    </ul>
+
+            <form action="{% url 'hotel:confirm' %}" method="POST">
+            {% csrf_token %}
+              <div class="row">
+                {% csrf_token %}
+		<div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
+		  <label for="headcount"
+			 class="font-weight-bold text-black">人数</label>
+		  <div>{{ form.headcount|add_class:'form-control' }}</div>
+		</div>
+
+		<div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
+		  <label for="name"
+			 class="font-weight-bold text-black">名前</label>
+		  <div>{{ form.name|add_class:'form-control' }}</div>
+		</div>
+
+		<div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
+		  <label for="email"
+			 class="font-weight-bold text-black">メール</label>
+		  <div>{{ form.email|add_class:'form-control' }}</div>
+		</div>
+
+		<input type="hidden" name="checkin" value="{{ checkin }}">
+	      <input type="hidden" name="checkout" value="{{ checkout }}">
+	      <input type="hidden" name="room_type" value="{{ room_type }}">
+              <div class="col-md-6 col-lg-3 align-self-end">
+		<button class="btn btn-primary btn-block text-white">予約</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}

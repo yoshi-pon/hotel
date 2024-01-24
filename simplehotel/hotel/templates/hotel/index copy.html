@@ -1,0 +1,276 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE HTML>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Simple Hotel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" type="text/css"
+	  href="//fonts.googleapis.com/css?family=
+		|Roboto+Sans:400,700|Playfair+Display:400,700">
+
+    <link rel="stylesheet" href="{% static 'hotel/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'hotel/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'hotel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'hotel/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'hotel/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'hotel/jquery.timepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'hotel/fancybox.min.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'hotel/fonts/ionicons/css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'hotel/fonts/fontawesome/css/font-awesome.min.css' %}">
+
+    <!-- Theme Style -->
+    <link rel='stylesheet' href="{% static 'hotel/style.css' %}">
+    <!--<link rel="stylesheet" href="css/style.css">-->
+  </head>
+  <body>
+    
+    <header class="site-header js-site-header">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-6 col-lg-4 site-logo" data-aos="fade">
+	    <a href="{% url 'hotel:index' %}">Simple Hotel</a></div>
+          <div class="col-6 col-lg-8">
+
+
+            <div class="site-menu-toggle js-site-menu-toggle"  data-aos="fade">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <!-- END menu-toggle -->
+
+            <div class="site-navbar js-site-navbar">
+              <nav role="navigation">
+                <div class="container">
+                  <div class="row full-height align-items-center">
+                    <div class="col-md-6 mx-auto">
+                      <ul class="list-unstyled menu">
+                        <li class="active"><a href="{% url 'hotel:index' %}">
+			    Home</a></li>
+                        <li><a href="{% url 'hotel:search' %}">検索</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- END head -->
+
+    <section class="site-hero overlay" style="background-image: url({% static 'hotel/images/hero_4.jpg' %})" data-stellar-background-ratio="0.5">
+      <div class="container">
+        <div class="row site-hero-inner justify-content-center align-items-center">
+          <div class="col-md-10 text-center" data-aos="fade-up">
+            <h1 class="heading">快適なステイをお約束</h1>
+          </div>
+        </div>
+      </div>
+
+      <a class="mouse smoothscroll" href="#next">
+        <div class="mouse-icon">
+          <span class="mouse-wheel"></span>
+        </div>
+      </a>
+    </section>
+    <!-- END section -->
+
+    <section class="section bg-light pb-0"  >
+      <div class="container">
+	
+        <div class="row check-availabilty" id="next">
+          <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
+	    
+            <form action="{% url 'hotel:search' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+
+	      <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
+                  <label for="checkin_date" class=
+			 "font-weight-bold text-black">チェックイン</label>
+                    <div>{{ form.checkin|add_class:'form-control' }}</div>
+                </div>
+		
+                <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
+                  <label for="checkout_date" class=
+			 "font-weight-bold text-black">チェックアウト</label>
+		    <div>{{ form.checkout|add_class:'form-control' }}</div>
+                </div>
+
+                    <div class="col-md-6 mb-3 mb-md-0 col-lg-3">
+		      <label for="adults" class="font-weight-bold text-black">
+			人数</label>
+			<div>{{ form.headcount|add_class:'form-control'}}</div>
+                    </div>
+		
+                <div class="col-md-6 col-lg-3 align-self-end">
+                  <button class="btn btn-primary btn-block text-white">
+		    検索</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-12 col-lg-7 ml-auto order-lg-2 position-relative mb-5" data-aos="fade-up">
+            <figure class="img-absolute">
+              <img src="{% static 'hotel/images/food-1.jpg' %}" alt="Image" class="img-fluid">
+            </figure>
+            <img src="{% static 'hotel/images/img_1.jpg' %}" alt="Image" class="img-fluid rounded">
+          </div>
+          <div class="col-md-12 col-lg-4 order-lg-1" data-aos="fade-up">
+            <h2 class="heading">Welcome!</h2>
+            <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-md-7">
+            <h2 class="heading" data-aos="fade-up">お部屋</h2>
+            <p data-aos="fade-up" data-aos-delay="100">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <a href="#" class="room">
+              <figure class="img-wrap">
+                <img src="{% static 'hotel/images/img_1.jpg' %}" alt="Free website template" class="img-fluid mb-3">
+              </figure>
+              <div class="p-3 text-center room-info">
+                <h2>シングル</h2>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <a href="#" class="room">
+              <figure class="img-wrap">
+                <img src="{% static 'hotel/images/img_2.jpg' %}" alt="Free website template" class="img-fluid mb-3">
+              </figure>
+              <div class="p-3 text-center room-info">
+                <h2>ダブル</h2>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <a href="#" class="room">
+              <figure class="img-wrap">
+                <img src="{% static 'hotel/images/img_3.jpg' %}" alt="Free website template" class="img-fluid mb-3">
+              </figure>
+              <div class="p-3 text-center room-info">
+                <h2>ツイン</h2>
+              </div>
+            </a>
+          </div>
+
+
+        </div>
+      </div>
+    </section>
+    
+    
+    <section class="section slider-section bg-light">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-md-7">
+            <h2 class="heading" data-aos="fade-up">インテリア</h2>
+            <p data-aos="fade-up" data-aos-delay="100">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="home-slider major-caousel owl-carousel mb-5" data-aos="fade-up" data-aos-delay="200">
+              <div class="slider-item">
+                <a href="{% static 'hotel/images/slider-1.jpg' %}" data-fancybox="images" data-caption="Caption for this image"><img src="{% static 'hotel/images/slider-1.jpg' %}" alt="Image placeholder" class="img-fluid"></a>
+              </div>
+              <div class="slider-item">
+                <a href="{% static 'hotel/images/slider-2.jpg' %}" data-fancybox="images" data-caption="Caption for this image"><img src="{% static 'hotel/images/slider-2.jpg' %}" alt="Image placeholder" class="img-fluid"></a>
+              </div>
+              <div class="slider-item">
+                <a href="{% static 'hotel/images/slider-3.jpg' %}" data-fancybox="images" data-caption="Caption for this image"><img src="{% static 'hotel/images/slider-3.jpg' %}" alt="Image placeholder" class="img-fluid"></a>
+              </div>
+              <div class="slider-item">
+                <a href="{% static 'hotel/images/slider-4.jpg' %}" data-fancybox="images" data-caption="Caption for this image"><img src="{% static 'hotel/images/slider-4.jpg' %}" alt="Image placeholder" class="img-fluid"></a>
+              </div>
+              <div class="slider-item">
+                <a href="{% static 'hotel/images/slider-5.jpg' %}" data-fancybox="images" data-caption="Caption for this image"><img src="{% static 'hotel/images/slider-5.jpg' %}" alt="Image placeholder" class="img-fluid"></a>
+              </div>
+              <div class="slider-item">
+                <a href="{% static 'hotel/images/slider-6.jpg' %}" data-fancybox="images" data-caption="Caption for this image"><img src="{% static 'hotel/images/slider-6.jpg' %}" alt="Image placeholder" class="img-fluid"></a>
+              </div>
+              <div class="slider-item">
+                <a href="{% static 'hotel/images/slider-7.jpg' %}" data-fancybox="images" data-caption="Caption for this image"><img src="{% static 'hotel/images/slider-7.jpg' %}" alt="Image placeholder" class="img-fluid"></a>
+              </div>
+            </div>
+            <!-- END slider -->
+          </div>
+        
+        </div>
+      </div>
+    </section>
+    <!-- END section -->
+    
+    <section class="section bg-image overlay" style="background-image: url({% static 'hotel/images/hero_4.jpg' %});">
+        <div class="container" >
+          <div class="row align-items-center">
+            <div class="col-12 col-md-6 text-center mb-4 mb-md-0 text-md-left" data-aos="fade-up">
+              <h2 class="text-white font-weight-bold">快適なステイをご提供します。今すぐご予約を！</h2>
+            </div>
+            <div class="col-12 col-md-6 text-center text-md-right" data-aos="fade-up" data-aos-delay="200">
+              <a href="{% url 'hotel:search' %}" class="btn btn-outline-white-primary py-3 text-white px-5">今すぐ予約</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <footer class="section footer-section">
+      <div class="container">
+        <div class="row pt-5">
+          <p class="col-md-6 text-left">
+            <!-- Link back to Colorlib can't be removed.
+		 Template is licensed under CC BY 3.0. -->
+            Copyright &copy;
+	    <script>document.write(new Date().getFullYear());</script>
+	    All rights reserved | This template is made by
+	    <a href="https://colorlib.com" target="_blank" >
+	      Colorlib（このサイトはデモです。実際の予約はできません）</a>
+            <!-- Link back to Colorlib can't be removed.
+		 Template is licensed under CC BY 3.0. -->
+	  </p>
+        </div>
+      </div>
+    </footer>
+    
+    <script src="{% static 'hotel/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'hotel/js/jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'hotel/js/popper.min.js' %}"></script>
+    <script src="{% static 'hotel/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'hotel/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'hotel/js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'hotel/js/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'hotel/js/aos.js' %}"></script>
+    <script src="{% static 'hotel/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'hotel/js/jquery.timepicker.min.js' %}"></script>
+    <script src="{% static 'hotel/js/main.js' %}"></script>
+  </body>
+</html>

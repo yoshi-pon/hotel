@@ -1,0 +1,105 @@
+{% extends 'hotel/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block heading %}空室検索{% endblock %}
+
+{% block content %}
+    <section class="section bg-light pb-0"  >
+      <div class="container">
+	
+        <div class="row check-availabilty" id="next">
+          <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
+	    
+            <form action="{% url 'hotel:search' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+
+	      <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
+                  <label for="checkin_date" class=
+			 "font-weight-bold text-black">チェックイン</label>
+                    <div>{{ form.checkin|add_class:'form-control' }}</div>
+                </div>
+		
+                <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
+                  <label for="checkout_date" class=
+			 "font-weight-bold text-black">チェックアウト</label>
+		    <div>{{ form.checkout|add_class:'form-control' }}</div>
+                </div>
+
+                    <div class="col-md-6 mb-3 mb-md-0 col-lg-3">
+		      <label for="adults" class="font-weight-bold text-black">
+			人数</label>
+			<div>{{ form.headcount|add_class:'form-control'}}</div>
+                    </div>
+		
+                <div class="col-md-6 col-lg-3 align-self-end">
+                  <button class="btn btn-primary btn-block text-white">
+		    検索</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+     {% if availability %}
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="row align-items-center">
+	  <div class="col-md-12 col-lg-7 ml-auto order-lg-2 position-relative mb-5" data-aos="fade-up">
+            <figure class="img-absolute">
+              <img src="{% static 'hotel/images/food-1.jpg' %}" alt="Image" class="img-fluid">
+            </figure>
+            <img src="{% static 'hotel/images/img_1.jpg' %}" alt="Image" class="img-fluid rounded">
+          </div>
+          <div class="col-md-12 col-lg-4 order-lg-1" style="margin-top:7rem">
+            <h2 class="heading">空き状況</h2>
+	    <p class="mb-3">
+            <p class="h4">チェックイン: {{ checkin_date }}</p>
+	    <p class="h4">チェックアウト: {{ checkout_date }}</p>
+            <p class="mb-4">
+            <div class="h4">ツイン: 残り {{ availability.0 }} 部屋</div>
+	    <form method="POST" name="twn_reserve"
+		  action="{% url 'hotel:reserve' %}">
+	      {% csrf_token %}
+	      <input type="hidden" name="checkin" value="{{ checkin_date }}">
+	      <input type="hidden" name="checkout" value="{{ checkout_date }}">
+	      <input type="hidden" name="room_type" value="ツイン">
+	      <input type="submit" value="予約" class="btn btn-primary">
+	    </form>
+            </p>
+	    
+            <p class="mb-4">
+              <div class="h4">ダブル: 残り {{ availability.1 }} 部屋</div>
+	      <form method="POST" name="twn_reserve"
+		    action="{% url 'hotel:reserve' %}">
+	      {% csrf_token %}
+	      <input type="hidden" name="checkin" value="{{ checkin_date }}">
+	      <input type="hidden" name="checkout" value="{{ checkout_date }}">
+	      <input type="hidden" name="room_type" value="ダブル">
+	      <input type="submit" value="予約" class="btn btn-primary">
+	    </form>
+            </p>
+	    
+            <p class="mb-4">
+              <div class="h4">シングル: 残り {{ availability.2}} 部屋</div>
+	      <form method="POST" name="twn_reserve"
+		    action="{% url 'hotel:reserve' %}">
+	      {% csrf_token %}
+	      <input type="hidden" name="checkin" value="{{ checkin_date }}">
+	      <input type="hidden" name="checkout" value="{{ checkout_date }}">
+	      <input type="hidden" name="room_type" value="シングル">
+	      <input type="submit" value="予約" class="btn btn-primary">
+	    </form>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    {% endblock %}
