@@ -29,6 +29,7 @@
     <link rel='stylesheet' href="{% static 'hotel/style.css' %}">
     <!--<link rel="stylesheet" href="css/style.css">-->
   </head>
+  
   <body>
     
     <header class="site-header js-site-header">
@@ -131,5 +132,21 @@
     <script src="{% static 'hotel/js/bootstrap-datepicker.js' %}"></script>
     <script src="{% static 'hotel/js/jquery.timepicker.min.js' %}"></script>
     <script src="{% static 'hotel/js/main.js' %}"></script>
+
+    <script>
+      function checkDates(event) {
+	  var checkin = document.getElementById('checkin');
+	  var checkout = document.getElementById('checkout');
+	  
+	  if(checkin.value >= checkout.value)
+	  {
+	      alert("チェックインより後の日付を指定してください。");
+	      checkout.focus();
+	      return false;
+	  }
+
+	  return true;
+      }
+    </script>
   </body>
 </html>

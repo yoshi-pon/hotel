@@ -10,11 +10,28 @@
       <div class="container">
         <div class="row check-availabilty" id="next">
           <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
-	    <ul>
+	    <table class="table">
+	      <tbody>
+		<tr>
+		  <th scope="row" class="h5">チェックイン</th>
+		  <td class="h5">{{ checkin }}</td>
+		</tr>
+		<tr>
+		  <th scope="row" class="h5">チェックアウト</th>
+		  <td class="h5">{{ checkout }}</td>
+		</tr>
+		<tr>
+		  <th scope="row" class="h5">部屋タイプ</th>
+		  <td class="h5">{{ room_type }}</td>
+		</tr>
+	      </tbody>
+	    </table>
+	    
+<!--	    <ul>
 	      <li class="h4">チェックイン:   {{ checkin }}</li>
 	      <li class="h4">チェックアウト: {{ checkout }}</li>
 	      <li class="h4">部屋タイプ:    {{ room_type }}</li>
-	    </ul>
+	    </ul>-->
 
             <form action="{% url 'hotel:confirm' %}" method="POST">
             {% csrf_token %}

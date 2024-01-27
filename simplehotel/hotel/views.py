@@ -88,6 +88,12 @@ def confirm(request):
         checkin = request.POST['checkin']
         checkout = request.POST['checkout']
         room_type = request.POST['room_type']
+        if room_type == 'ツイン':
+            room_type_name = 'twn'
+        elif room_type == 'ダブル':
+            room_type_name = 'dbl'
+        else:
+            room_type_name = 'sgl'
 
         format = '%Y/%m/%d'
         checkin_date = datetime.datetime.strptime(checkin, format)
@@ -101,7 +107,7 @@ def confirm(request):
 
         reservation = Reservation(checkin=checkin_date, checkout=checkout_date,
                                   headcount=headcount, name=name, email=email,
-                                  room_type=room_type)
+                                  room_type=room_type_name)
         reservation.save()
 
         for i in range((checkout_date-checkin_date).days):

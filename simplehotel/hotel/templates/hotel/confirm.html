@@ -29,19 +29,39 @@
     </header>
 <!-- END head -->
 
-<section class="section" >
+<section class="section" style="margin-top: 4rem;">
   <div class="container">
     <div class="block-32">
       <p class="text-black">ご予約いただきありがとうございます。<br>
 	お客様のご予約内容をご確認ください。</p>
-      <ul class="list-unstyled text-black">
-	<li class="list-confirm">チェックイン: {{ checkin }}</li>
-	<li style="list-confirm">チェックアウト: {{ checkout }}</li>
-	<li style="list-confirm">部屋タイプ: {{ room_type }}</li>
-	<li style="list-confirm">人数: {{ headcount }} 人</li>
-	<li style="list-confirm">氏名: {{ name }} 様</li>
-	<li style="list-confirm">メール: {{ email }}</li>
-      </ul>
+      <table class="table">
+	<tbody>
+	  <tr>
+	    <th scope="row">チェックイン</th>
+	    <td>{{ checkin }}</td>
+	  </tr>
+	  <tr>
+	    <th scope="row">チェックアウト</th>
+	    <td>{{ checkout }}</td>
+	  </tr>
+	  <tr>
+	    <th scope="row">部屋タイプ</th>
+	    <td>{{ room_type }}</td>
+	  </tr>
+	  <tr>
+	    <th scope="row">人数</th>
+	    <td>{{ headcount }}</td>
+	  </tr>
+	  <tr>
+	    <th scope="row">氏名</th>
+	    <td>{{ name }}</td>
+	  </tr>
+	  <tr>
+	    <th scope="row">メール</th>
+	    <td>{{ email }}</td>
+	  </tr>
+	</tbody>
+      </table>
     </div>
   </div>
 </sction>
