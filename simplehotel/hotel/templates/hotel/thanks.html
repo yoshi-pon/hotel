@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Simple Hotel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" type="text/css"
+	  href="//fonts.googleapis.com/css?family=
+		|Roboto+Sans:400,700|Playfair+Display:400,700">
+
+    <link rel="stylesheet" href="{% static 'hotel/bootstrap.min.css' %}">
+
+    <!-- Theme Style -->
+    <link rel='stylesheet' href="{% static 'hotel/style.css' %}">
+    <!--<link rel="stylesheet" href="css/style.css">-->
+  </head>
+
+
+  <body class="bg-light">
+    <header class="site-header js-site-header">
+      <div class="col-6 col-lg-4 site-logo">
+	<a href="{% url 'hotel:index' %}" style="color:grey">Simple Hotel</a>
+      </div>
+    </header>
+<!-- END header -->
+
+<section class="section" style="margin-top: 4rem;">
+  <div class="container">
+    <div class="block-32">
+      <p class="text-black">ご予約を承りました。<br>
+      ご来店をお待ちしております。</p>
+    </div>
+  </div>
+</sction>
+</body>
+</html>

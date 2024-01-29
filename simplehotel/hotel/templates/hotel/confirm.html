@@ -32,8 +32,8 @@
 <section class="section" style="margin-top: 4rem;">
   <div class="container">
     <div class="block-32">
-      <p class="text-black">ご予約いただきありがとうございます。<br>
-	お客様のご予約内容をご確認ください。</p>
+      <p class="text-black">お客様のご予約内容をご確認ください。<br>
+      よろしければ、下の確定ボタンを押してください。</p>
       <table class="table">
 	<tbody>
 	  <tr>
@@ -62,10 +62,23 @@
 	  </tr>
 	</tbody>
       </table>
+
+      <form action="{% url 'hotel:book' %}" method="POST">
+        {% csrf_token %}
+	<input type="hidden" name="checkin" value="{{ checkin }}">
+	<input type="hidden" name="checkout" value="{{ checkout }}">
+	<input type="hidden" name="room_type" value="{{ room_type }}">
+	<input type="hidden" name="headcount" value="{{ headcount }}">
+	<input type="hidden" name="name" value="{{ name }}">
+	<input type="hidden" name="email" value="{{ email }}">
+
+	<div class="col-md-6 col-lg-3 align-self-end">
+	  <button class="btn btn-primary btn-block text-white">確定</button>
+	</div>
+      </form>
+      
     </div>
   </div>
 </sction>
 </body>
 </html>
-
-

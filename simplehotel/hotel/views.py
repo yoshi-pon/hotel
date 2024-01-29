@@ -1,6 +1,6 @@
 import datetime
 from django.views import generic
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpRequest
 from django.shortcuts import redirect, render
 
 from .models import Reservation, Room, Booked
@@ -88,6 +88,28 @@ def confirm(request):
         checkin = request.POST['checkin']
         checkout = request.POST['checkout']
         room_type = request.POST['room_type']
+
+        form = ReserveForm(request.POST)
+        if form.is_valid():
+            headcount = form.cleaned_data['headcount']
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+                
+        ctx = { 'checkin': checkin, 'checkout': checkout,
+                'room_type': room_type, 'headcount': headcount,
+                'name': name, 'email': email }
+
+        return render(request, 'hotel/confirm.html', ctx)
+
+    else:
+        return redirect('hotel:search')
+
+
+def book(request):
+    if request.method == "POST":
+        checkin = request.POST['checkin']
+        checkout = request.POST['checkout']
+        room_type = request.POST['room_type']
         if room_type == 'ツイン':
             room_type_name = 'twn'
         elif room_type == 'ダブル':
@@ -99,11 +121,9 @@ def confirm(request):
         checkin_date = datetime.datetime.strptime(checkin, format)
         checkout_date = datetime.datetime.strptime(checkout, format)
         
-        form = ReserveForm(request.POST)
-        if form.is_valid():
-            headcount = form.cleaned_data['headcount']
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
+        headcount = request.POST['headcount']
+        name = request.POST['name']
+        email = request.POST['email']
 
         reservation = Reservation(checkin=checkin_date, checkout=checkout_date,
                                   headcount=headcount, name=name, email=email,
@@ -131,11 +151,12 @@ def confirm(request):
                     booked.single_booked += 1
                 booked.save()
 
-        ctx = { 'checkin': checkin, 'checkout': checkout,
-                'room_type': room_type, 'headcount': headcount,
-                'name': name, 'email': email }
-
-        return render(request, 'hotel/confirm.html', ctx)
+        '''return render(request, 'hotel/thanks.html')'''
+        return redirect('hotel:thanks')
 
     else:
-        return redirect('hotel:search')
+        return redirect('hotel:index')
+
+
+def thanks(request):
+    return render(request, 'hotel/thanks.html')
