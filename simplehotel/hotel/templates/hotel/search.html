@@ -12,20 +12,21 @@
         <div class="row check-availabilty" id="next">
           <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
 	    
-            <form action="{% url 'hotel:search' %}" method="POST" onsubmit="return checkDates();">
+            <form action="{% url 'hotel:search' %}" method="POST"
+		  onsubmit="return checkDates();">
             {% csrf_token %}
             <div class="row">
 
 	      <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
                   <label for="checkin_date" class=
 			 "font-weight-bold text-black">チェックイン</label>
-                    <div>{{ form.checkin|add_class:'form-control'|attr:'id:checkin' }}</div>
+                  <div>{{ form.checkin|add_class:'form-control'|attr:'id:checkin' }}</div>
                 </div>
 		
                 <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
                   <label for="checkout_date" class=
 			 "font-weight-bold text-black">チェックアウト</label>
-		    <div>{{ form.checkout|add_class:'form-control'|attr:'id:checkout'|attr:'oninput:checkDates()' }}</div>
+		  <div>{{ form.checkout|add_class:'form-control'|attr:'id:checkout'|attr:'oninput:checkDates()' }}</div>
                 </div>
 
                     <div class="col-md-6 mb-3 mb-md-0 col-lg-3">
@@ -92,6 +93,11 @@
 		      <input type="hidden" name="room_type" value="ツイン">
 		      <input type="submit" value="予約" class="btn btn-primary">
 		    </form>
+		    {% else %}
+		    <form>
+		      <input type="submit" value="予約" class="btn btn-primary"
+			     disabled="disabled">
+		    </form>
 		    {% endif %}
 		  </td>
 		</tr>
@@ -110,6 +116,11 @@
 			     value="{{ checkout_date }}">
 		      <input type="hidden" name="room_type" value="ダブル">
 		      <input type="submit" value="予約" class="btn btn-primary">
+		    </form>
+		    {% else %}
+		    <form>
+		      <input type="submit" value="予約" class="btn btn-primary"
+			     disabled="disabled">
 		    </form>
 		    {% endif %}
 		  </td>
