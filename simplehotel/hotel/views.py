@@ -20,9 +20,9 @@ def search(request):
             checkout: datetime.date = form.cleaned_data["checkout"]
             headcount = form.cleaned_data["headcount"]
 
+        # 日数を計算し、検索する日付をリストに格納する
         days = (checkout - checkin).days
         dates = []
-
         for i in range(days):
             dates.append(checkin + datetime.timedelta(i))
 
@@ -30,10 +30,12 @@ def search(request):
         dbl_remain = []
         sgl_remain = []
 
+        # 各部屋タイプの総部屋数を取得する
         twn_rooms = Room.objects.filter(room_type='twn').count()
         dbl_rooms = Room.objects.filter(room_type='dbl').count()
         sgl_rooms = Room.objects.filter(room_type='sgl').count()
 
+        # 各日付について、残り部屋数を、総部屋数から予約済みの部屋数を差し引くことで計算する
         for date in dates:
             booked_rooms = Booked.objects.filter(date=date).values()
             if booked_rooms.exists():
@@ -62,16 +64,15 @@ def search(request):
 
 
 def reserve(request):
+    '''
+    検索画面から遷移してきたときに、チェックイン日、チェックアウト日、部屋タイプはPOSTの情報から
+    そのまま表示し、それ以外はReserveFormを表示する。
+    '''
     if request.method == "POST":
-        # When the "予約" button is clicked with data filled on the search page
         checkin = request.POST['checkin']
         checkout = request.POST['checkout']
         room_type = request.POST['room_type']
 
-        '''
-        form = ReserveForm({'checkin': checkin_formated,
-                            'checkout': checkout_formated,
-                            'room_type': room_type })'''
         form = ReserveForm()
 
         ctx = {'form': form, 'checkin': checkin, 'checkout': checkout,
@@ -84,6 +85,9 @@ def reserve(request):
 
 
 def confirm(request):
+    """
+    予約画面からPOSTで送信された情報を確認画面に表示する。
+    """
     if request.method == "POST":
         checkin = request.POST['checkin']
         checkout = request.POST['checkout']
@@ -106,6 +110,10 @@ def confirm(request):
 
 
 def book(request):
+    """
+    確認画面で確定された場合、POSTで送信された情報に基づいて、Reservationテーブルと
+    Bookedテーブルを更新する。
+    """
     if request.method == "POST":
         checkin = request.POST['checkin']
         checkout = request.POST['checkout']
@@ -130,6 +138,7 @@ def book(request):
                                   room_type=room_type_name)
         reservation.save()
 
+        # 予約された各日付について、その日のレコードの該当する部屋タイプの予約済み数をインクリメントする。
         for i in range((checkout_date-checkin_date).days):
             date = checkin_date + datetime.timedelta(i)
             try:
@@ -151,7 +160,6 @@ def book(request):
                     booked.single_booked += 1
                 booked.save()
 
-        '''return render(request, 'hotel/thanks.html')'''
         return redirect('hotel:thanks')
 
     else:
