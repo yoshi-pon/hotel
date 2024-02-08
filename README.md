@@ -6,9 +6,9 @@
 
 データベース: SQLite
 
-開発環境: ArchLinux、Emacs、Raspbery Pi
+開発環境: ArchLinux、Emacs、Raspberry Pi
 
-実稼働環境: AWS Lightsail、Ubuntu 22.04、Nginx 1.18、Gunicorn 21.2
+実稼働環境: AWS Lightsail、Ubuntu Server 22.04、Nginx 1.18、Gunicorn 21.2
 
 ## このプロジェクトについての説明
 
@@ -41,3 +41,5 @@ Djangoは公式のチュートリアルと書籍を使用して勉強しまし�
 管理画面のカスタマイズ(現状はデフォルトのまま)
 
 ユーザ登録機能。ユーザーが自分の予約を確認したり、変更をリクエストしたりできるようにする。
+
+iPhone、iPadだと検索フォームのコントロールがうまく表示されないので、その改善。
